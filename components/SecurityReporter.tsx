@@ -72,11 +72,11 @@ const SecurityReporter: React.FC<SecurityReporterProps> = ({ onComplete }) => {
   return (
     <div className="max-w-2xl mx-auto space-y-8 animate-in slide-in-from-bottom-4 duration-500">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-white mb-2">Clean Desk Audit</h2>
-        <p className="text-slate-400">Take a photo of your (or a) workspace. Ensure no sensitive data is exposed.</p>
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Clean Desk Audit</h2>
+        <p className="text-slate-500 dark:text-slate-400">Take a photo of your (or a) workspace. Ensure no sensitive data is exposed.</p>
       </div>
 
-      <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 backdrop-blur-sm overflow-hidden relative min-h-[400px] flex flex-col items-center justify-center">
+      <div className="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 backdrop-blur-sm overflow-hidden relative min-h-[400px] flex flex-col items-center justify-center shadow-sm transition-colors duration-300">
         
         {/* Camera View */}
         {isCameraOpen && !image && (
@@ -94,14 +94,14 @@ const SecurityReporter: React.FC<SecurityReporterProps> = ({ onComplete }) => {
         {/* Initial State */}
         {!isCameraOpen && !image && (
           <div className="text-center py-12">
-            <div className="w-20 h-20 bg-slate-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Camera size={40} className="text-emerald-400" />
+            <div className="w-20 h-20 bg-slate-100 dark:bg-slate-700/50 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors">
+              <Camera size={40} className="text-emerald-600 dark:text-emerald-400" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Ready to Audit?</h3>
-            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Check for sticky notes with passwords, unlocked screens, or sensitive papers.</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Ready to Audit?</h3>
+            <p className="text-slate-500 dark:text-slate-400 mb-8 max-w-sm mx-auto">Check for sticky notes with passwords, unlocked screens, or sensitive papers.</p>
             <button 
               onClick={startCamera}
-              className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-900/50"
+              className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-500/30"
             >
               Open Camera
             </button>
@@ -111,7 +111,7 @@ const SecurityReporter: React.FC<SecurityReporterProps> = ({ onComplete }) => {
         {/* Captured Image Preview */}
         {image && (
           <div className="w-full space-y-6">
-            <div className="relative rounded-xl overflow-hidden border border-slate-600">
+            <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-600">
               <img src={image} alt="Workspace" className="w-full h-64 object-cover" />
               {!result && (
                 <button 
@@ -127,7 +127,7 @@ const SecurityReporter: React.FC<SecurityReporterProps> = ({ onComplete }) => {
               <button
                 onClick={handleAnalyze}
                 disabled={analyzing}
-                className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30"
               >
                 {analyzing ? (
                   <>
@@ -146,25 +146,25 @@ const SecurityReporter: React.FC<SecurityReporterProps> = ({ onComplete }) => {
         {/* Results */}
         {result && (
           <div className="w-full mt-6 animate-in zoom-in-95 duration-300">
-             <div className={`p-6 rounded-xl border ${result.threatType === 'SAFE' ? 'bg-emerald-500/10 border-emerald-500/50' : 'bg-orange-500/10 border-orange-500/50'}`}>
+             <div className={`p-6 rounded-xl border ${result.threatType === 'SAFE' ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/50' : 'bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/50'}`}>
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={`p-3 rounded-full ${result.threatType === 'SAFE' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-orange-500/20 text-orange-400'}`}>
+                  <div className={`p-3 rounded-full ${result.threatType === 'SAFE' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400'}`}>
                     {result.threatType === 'SAFE' ? <Check size={28} /> : <AlertOctagon size={28} />}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">{result.threatType === 'SAFE' ? 'Clean Desk Confirmed' : 'Security Violation Detected'}</h3>
-                    <p className="text-sm text-slate-400">{result.confidenceScore}% AI Confidence</p>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">{result.threatType === 'SAFE' ? 'Clean Desk Confirmed' : 'Security Violation Detected'}</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{result.confidenceScore}% AI Confidence</p>
                   </div>
                 </div>
                 
-                <p className="text-slate-200 mb-6 bg-slate-900/50 p-4 rounded-lg">{result.explanation}</p>
+                <p className="text-slate-700 dark:text-slate-200 mb-6 bg-slate-100 dark:bg-slate-900/50 p-4 rounded-lg">{result.explanation}</p>
 
-                <div className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                  <span className="text-slate-400">Points Earned</span>
-                  <span className="text-2xl font-bold text-emerald-400">+{result.pointsAwarded} XP</span>
+                <div className="flex items-center justify-between p-4 bg-slate-100 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span className="text-slate-500 dark:text-slate-400">Points Earned</span>
+                  <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">+{result.pointsAwarded} XP</span>
                 </div>
                 
-                <button onClick={reset} className="w-full mt-4 py-2 text-slate-400 hover:text-white transition-colors">
+                <button onClick={reset} className="w-full mt-4 py-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
                   Audit Another Workspace
                 </button>
              </div>

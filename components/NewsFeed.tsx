@@ -20,10 +20,10 @@ const NewsFeed: React.FC = () => {
     <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-white mb-2">Threat Intelligence</h2>
-          <p className="text-slate-400">Latest briefings on global cybersecurity trends.</p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Threat Intelligence</h2>
+          <p className="text-slate-500 dark:text-slate-400">Latest briefings on global cybersecurity trends.</p>
         </div>
-        <button onClick={() => { setLoading(true); fetchSecurityNews().then(d => { setNews(d); setLoading(false); }); }} className="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 text-slate-400 transition-colors">
+        <button onClick={() => { setLoading(true); fetchSecurityNews().then(d => { setNews(d); setLoading(false); }); }} className="p-2 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 transition-colors">
           <Newspaper size={20} />
         </button>
       </div>
@@ -31,18 +31,18 @@ const NewsFeed: React.FC = () => {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1,2,3].map(i => (
-             <div key={i} className="h-48 bg-slate-800/50 rounded-2xl border border-slate-700 animate-pulse"></div>
+             <div key={i} className="h-48 bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 animate-pulse"></div>
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {news.map((item, idx) => (
-            <div key={idx} className="bg-slate-800/50 rounded-2xl border border-slate-700 p-6 backdrop-blur-sm hover:border-indigo-500/50 transition-all group flex flex-col">
+            <div key={idx} className="bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 backdrop-blur-sm hover:border-indigo-500/50 transition-all group flex flex-col shadow-sm hover:shadow-md">
               <div className="flex justify-between items-start mb-4">
                 <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${
-                  item.severity === 'HIGH' ? 'bg-red-500/20 text-red-400' :
-                  item.severity === 'MEDIUM' ? 'bg-orange-500/20 text-orange-400' :
-                  'bg-blue-500/20 text-blue-400'
+                  item.severity === 'HIGH' ? 'bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400' :
+                  item.severity === 'MEDIUM' ? 'bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400' :
+                  'bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400'
                 }`}>
                   {item.severity} Impact
                 </span>
@@ -51,12 +51,12 @@ const NewsFeed: React.FC = () => {
                 </span>
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-400 transition-colors">{item.headline}</h3>
-              <p className="text-slate-400 text-sm mb-6 flex-1 leading-relaxed">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{item.headline}</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-1 leading-relaxed">
                 {item.summary}
               </p>
               
-              <button className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors mt-auto">
+              <button className="flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors mt-auto">
                 Read Briefing <ExternalLink size={14} />
               </button>
             </div>

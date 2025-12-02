@@ -17,12 +17,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-slate-900 border-r border-slate-800 p-6 flex flex-col z-20 hidden md:flex">
+    <aside className="fixed left-0 top-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-6 flex flex-col z-20 hidden md:flex transition-colors duration-300">
       <div className="flex items-center gap-3 mb-10 px-2">
-        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-md shadow-indigo-500/30">
           <ShieldCheck className="text-white" size={20} />
         </div>
-        <h1 className="text-xl font-bold text-white tracking-tight">SecuQuest</h1>
+        <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">SecuQuest</h1>
       </div>
 
       <nav className="space-y-2 flex-1">
@@ -34,19 +34,19 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
               onClick={() => onChangeView(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
                 isActive 
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/50' 
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' 
+                  : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <item.icon size={20} className={isActive ? 'text-white' : 'text-slate-500 group-hover:text-white'} />
+              <item.icon size={20} className={isActive ? 'text-white' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-900 dark:group-hover:text-white'} />
               <span className="font-medium">{item.label}</span>
             </button>
           );
         })}
       </nav>
 
-      <div className="pt-6 border-t border-slate-800">
-        <button className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-white transition-colors">
+      <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <button className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
           <LogOut size={20} />
           <span className="font-medium">Sign Out</span>
         </button>
