@@ -1,0 +1,7 @@
+{
+  "name": "SecuQuest: Gamified Security Reporter",
+  "description": "A gamified platform for employees to report phishing emails and security violations, earn points, and complete bite-sized security training.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
